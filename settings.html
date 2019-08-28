@@ -1,0 +1,66 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Billionaire Club</title>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/tabletop.js/1.5.1/tabletop.min.js'>
+</script>
+
+</head>
+<body>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/tabletop.js/1.5.1/tabletop.min.js'></script>
+<script type='text/javascript'>    
+  var publicSpreadsheetUrl = 'https://docs.google.com/spreadsheets/d/110aoXD3Jeq96fGOYeHWGe9aD0F2XQ9uz2CO8-4R49vY/pubhtml';
+
+  function getUrlParam(name) {
+    var results = new RegExp('[\\?&]' + name + '=([^&#]*)').exec(window.location.href);
+    return (results && results[1]) || undefined;
+  }
+
+  function init() {
+    Tabletop.init( { key: publicSpreadsheetUrl,
+                     callback: showInfo,
+                     simpleSheet: true } )
+  }
+
+    function showInfo(data, tabletop) {
+	var student_ids;
+	
+	var id = getUrlParam('id');
+	console.log('ID: ' + id);                // 'null'
+		if (id > "") {
+    		
+    		
+    		for (var i = 0; i < data.length; i++){
+		
+				if(id == data[i].id){
+					document.write('<div style="background: #000000;">');
+    				document.write('<h1 style="color: #FFFFFF";>');
+					document.write(data[i].name);
+					document.write(' Settings </h1>');
+					document.write('<img src="./images/');
+					document.write(data[i].profile_pic);
+					document.write('" style="width:100px;">');
+					document.write('">');
+					document.write('<p  style="color: #FFFFFF";>Password hash:')
+					document.write(data[i].password_hash);
+					document.write('</p>');
+				}
+			}
+			
+			document.write('<div style="text-align: center;"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTrLO1gpjSbw68vEoSx79rlsEHQmG2BUGMWcpiS8I8db25PcLmk"></div>');
+    		
+			document.write('</div>');
+			
+		} else {
+    		document.write('<meta http-equiv="Refresh" content="5; url="./index.html">');
+		}
+    
+      console.log(data);
+ 	}	
+
+  window.addEventListener('DOMContentLoaded', init)
+</script>
+
+</body>
+
